@@ -6,19 +6,16 @@ from gpiozero import DigitalOutputDevice
 
 VALVES_MAPPING = {
     # valve ID : GPIO Port,
-    1 : 4,
-    2 : 17,
-    3 : 27,
-    4 : 22,
-    5 : 5,
-    6 : 6,
-    7 : 13,
-    8 : 19,
+    1 : 19,
+    2 : 13,
+    3 : 6,
+    4 : 5,
+    5 : 5,22,
+    6 : 27,
+    7 : 17,
+    8 : 4,
 }
 VALVES_COUNT = len(VALVES_MAPPING.keys())
-
-VALVE_STATES = ("closed","open","unknown")
-
 
 class Valve(DigitalOutputDevice):
 
