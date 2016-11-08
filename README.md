@@ -2,41 +2,63 @@
 
 Simple automated irrigating system for your Pi
 
+## Requirements
+
+- A Raspberry Pi (tested on a 2 B+)
+- Any micro SD card
+
+
 ## Installation
-
-Raspberry Pi 2 B+
-MicroSD 16Go
-
 
 ### OS Installation
 
-Raspbian Jessie Lite
+Download 'Raspbian Jessie Lite' from [official website](https://www.raspberrypi.org/downloads/raspbian/) and burn SD card.
 
 Boot
 
-$ sudo raspi-config
--> keyboard
--> SSH
+    $ sudo raspi-config
 
-$ sudo apt-get update && sudo apt-get upgrade
+- Adjust keyboard
+- Activate SSH server
 
-### Installation Wifi
+Then :
 
-$ sudo vi /etc/wp /etc/wpa_supplicant/wpa_supplicant.conf
+    $ sudo apt-get update
+    $ sudo apt-get upgrade
 
-country=FR
-ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-update_config=1
-network={
-ssid="<my wifi SSID>"
-psk="<my password>"
-}
+### Wifi Installation
 
+    $ sudo vi /etc/wp /etc/wpa_supplicant/wpa_supplicant.conf
 
-$ sudo reboot
+    country=FR
+    ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+    update_config=1
+    network={
+    ssid="<my wifi SSID>"
+    psk="<my password>"
+    }
 
-### Python Installation
+And then :
 
-$ sudo apt-get install ipython python-pip
-$ sudo pip install gpiozero
+    $ sudo reboot
 
+### Software installation
+
+#### Get the latest Pi Jardin
+
+    $ sudo apt-get install git
+    $ git clone https://github.com/odeckmyn/pijardin.git
+    $ cd pijardin
+    $ make install
+
+#### Run installer
+
+    $ make install
+
+This will i
+
+### Pi Jardin installation
+
+Connect via SSH, using user `pi`
+
+    $ git
