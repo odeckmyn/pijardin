@@ -2,6 +2,8 @@
 
 Simple automated irrigating system for your Pi
 
+https://github.com/odeckmyn/pijardin
+
 ## Requirements
 
 - A Raspberry Pi (tested on a 2 B+)

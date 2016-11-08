@@ -31,3 +31,8 @@ update: virtualenv update.git
 
 update.git:
 	git pull
+
+
+# -- Dev section --------------------
+dev.test: virtualenv
+	python -m test_main.py
