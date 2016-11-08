@@ -42,6 +42,9 @@ class ValvesCollection(object):
     def __init__(self, count=VALVES_COUNT):
         self.valves=[ Valve(id+1) for id in range(count) ]
 
+    def __getitem__(self, id):
+        return self.valves[id]
+
 valves=ValvesCollection()
 
 
