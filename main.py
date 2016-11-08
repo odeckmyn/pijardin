@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from time import sleep
-from gpiozero import DigitalInputDevice
+from gpiozero import DigitalOutputDevice
 
 VALVES_MAPPING = {
     # valve ID : GPIO Port,
@@ -20,7 +20,7 @@ VALVES_COUNT = len(VALVES_MAPPING.keys())
 VALVE_STATES = ("closed","open","unknown")
 
 
-class Valve(DigitalInputDevice):
+class Valve(DigitalOutputDevice):
 
     def __init__(self, id):
         self.id = id
