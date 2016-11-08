@@ -31,10 +31,10 @@ class Valve(DigitalInputDevice):
     def __unicode__(self):
         return u"Valve #%d (GPIO %d), status=%s" % (self.id, self._gpioport, self._state)
 
-    def open(self):
+    def water(self):
         self.on()
 
-    def close(self):
+    def nowater(self):
         self.off()
 
 class ValvesCollection(object):
