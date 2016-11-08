@@ -35,4 +35,4 @@ update.git:
 
 # -- Dev section --------------------
 dev.test: virtualenv
-	python -m test_main.py
+	python test_main.py

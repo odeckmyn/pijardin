@@ -6,6 +6,11 @@ def test__00__init():
     """
     >>> print valves
     xxx
+    >>> for id in range(8):
+        print valves[id]
+        valves[id].on()
+        sleep(1)
+        valves[id].off()
     """
 
 

@@ -15,9 +15,9 @@ VALVES_MAPPING = {
     7 : 13,
     8 : 19,
 }
+VALVES_COUNT = len(VALVES_MAPPING.keys())
 
 VALVE_STATES = ("closed","open","unknown")
-
 
 
 class Valve(DigitalInputDevice):
@@ -39,7 +39,7 @@ class Valve(DigitalInputDevice):
 
 class ValvesCollection(object):
 
-    def __init__(cls, count=8):
+    def __init__(self, count=VALVES_COUNT):
         self.valves=[ Valve(id+1) for id in range(count) ]
 
 valves=ValvesCollection()
