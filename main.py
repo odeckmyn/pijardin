@@ -40,7 +40,7 @@ class Valve(DigitalInputDevice):
 class ValvesCollection(object):
 
     def __init__(cls, count=8):
-        self.valves=[ Valve(id) for id in count(count) ]
+        self.valves=[ Valve(id+1) for id in range(count) ]
 
 valves=ValvesCollection()
 
