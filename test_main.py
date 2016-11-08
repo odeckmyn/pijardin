@@ -7,11 +7,11 @@ def test__00__init():
     >>> print valves
     xxx
     >>> for id in range(8):
-            print valves[id]
-            valves[id].water()
-            sleep(1)
-            valves[id].nowater()
-            sleep(1)
+    ...     print valves[id]
+    ...     valves[id].water()
+    ...     sleep(1)
+    ...     valves[id].nowater()
+    ...     sleep(1)
     """
 
 
