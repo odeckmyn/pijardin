@@ -22,7 +22,7 @@ VALVE_STATES = ("closed","open","unknown")
 
 class Valve(DigitalInputDevice):
 
-    def __init__(cls, id):
+    def __init__(self, id):
         self.id = id
         self._state = "closed"
         self._gpioport = VALVES_MAPPING[self.id]
