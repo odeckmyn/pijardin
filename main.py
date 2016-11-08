@@ -40,7 +40,7 @@ class ValvesCollection(object):
         self.valves=[ Valve(id+1) for id in range(count) ]
 
     def __getitem__(self, id):
-        return self.valves[id]
+        return self.valves[id-1]
 
 
 valves=ValvesCollection()
