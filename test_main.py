@@ -9,9 +9,9 @@ def test__00__init():
     >>> for id in range(8):
     ...     print valves[id]
     ...     valves[id].water()
-    ...     sleep(1)
+    ...     sleep(0.5)
     ...     valves[id].nowater()
-    ...     sleep(1)
+    ...     sleep(0.5)
     """
 
 

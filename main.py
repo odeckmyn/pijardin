@@ -26,10 +26,7 @@ class Valve(DigitalOutputDevice):
         self.id = id
         self._state = "closed"
         self._gpioport = VALVES_MAPPING[self.id]
-        super(self.__class__, self).__init__(self._gpioport)
-
-    def __unicode__(self):
-        return u"Valve #%d (GPIO %d), status=%s" % (self.id, self._gpioport, self._state)
+        super(self.__class__, self).__init__(self._gpioport, pullup=True)
 
     def water(self):
         self.on()
@@ -44,6 +41,7 @@ class ValvesCollection(object):
 
     def __getitem__(self, id):
         return self.valves[id]
+
 
 valves=ValvesCollection()
 
