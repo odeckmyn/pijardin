@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from .main import *
+from main import *
 
 def test__00__init():
     """
