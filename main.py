@@ -26,7 +26,7 @@ class Valve(DigitalOutputDevice):
         self.id = id
         self._state = "closed"
         self._gpioport = VALVES_MAPPING[self.id]
-        super(self.__class__, self).__init__(self._gpioport, pullup=True)
+        super(self.__class__, self).__init__(self._gpioport, active_high=False)
 
     def water(self):
         self.on()
