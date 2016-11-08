@@ -7,12 +7,11 @@ Simple automated irrigating system for your Pi
 - A Raspberry Pi (tested on a 2 B+)
 - Any micro SD card
 
-
 ## Installation
 
 ### OS Installation
 
-Download 'Raspbian Jessie Lite' from [official website](https://www.raspberrypi.org/downloads/raspbian/) and burn SD card.
+Download 'Raspbian Jessie Lite' from [official website](https://www.raspberrypi.org/downloads/raspbian/) and [burn](http://elinux.org/RPi_Easy_SD_Card_Setup) SD card.
 
 Boot
 
@@ -44,21 +43,33 @@ And then :
 
 ### Software installation
 
+Connect to your Pi via SSH, using user `pi` :
+
+    ssh pi@<myipaddress>
+
+Stock password is `raspberry`. We strongly advice to change it and install and [ssh key](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2) for login.
+
 #### Get the latest Pi Jardin
 
+    $ cd ~
     $ sudo apt-get install git
     $ git clone https://github.com/odeckmyn/pijardin.git
-    $ cd pijardin
-    $ make install
 
 #### Run installer
 
+    $ cd pijardin
     $ make install
 
-This will i
+This will install all dependencies
 
-### Pi Jardin installation
+#### Finalize
 
-Connect via SSH, using user `pi`
+    $ source _venv/bin/activate
 
-    $ git
+## Updating my Pi Jardin
+
+    $ cd
+    $ cd pijardin
+    $ source _venv/bin/activate
+    $ make update
+
