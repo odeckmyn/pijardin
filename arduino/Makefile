@@ -7,7 +7,7 @@ ARDUINO_LIBS = CmdMessenger
 include /usr/share/arduino/Arduino.mk
 
 
-ARDMK_DIR     = /usr/share/arduino/Arduino.mk
+# ARDMK_DIR     = /usr/share/arduino/Arduino.mk
 # AVR_TOOLS_DIR = /usr
 # MONITOR_PORT  = /dev/ttyACM0
 # BOARD_TAG     = mega2560
