@@ -1,5 +1,12 @@
-ARDUINO_PORT=/dev/ttyUSB0
-ARDUINO_BAUD=57600
+# ARDUINO_INSTALL_DIR=~/Downloads/arduino-1.8.3/
+# ARDUINO_PORT=/dev/ttyUSB0
+# ARDUINO_BAUD=57600
+# ARDUINO_ARCHITECTURE=avr
+# ARDUINO_BOARD_TAG=atmega328
+# ARDUINO_BOARD_TAG=atmegang
+# ARDUINO_BOARD_SUB=atmega328
+
+include /usr/share/arduino/Arduino.mk
 
 default:
 	@echo "Nothing to do by default. Please read the manual."
@@ -15,6 +22,7 @@ _venv3/bin/activate: requirements.txt
 virtualenv:
 	@if test "$(VIRTUAL_ENV)" = "" ; then \
 		echo "**** Please first start your virtualenv : source _venv3/bin/activate ****"; \
+		echo "* First install : make virtualenv.installed"
 		exit 1; \
 	fi
 
