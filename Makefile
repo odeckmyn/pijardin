@@ -8,7 +8,7 @@ default:
 virtualenv.installed: _venv3/bin/activate
 
 _venv3/bin/activate: requirements.txt
-	test -d _venv3 || virtualenv _venv3
+	test -d _venv3 || virtualenv -p /usr/bin/python3 _venv3
 	_venv3/bin/pip install -Ur requirements.txt
 	touch _venv3/bin/activate
 
