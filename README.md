@@ -51,6 +51,13 @@ And then :
 
 Reach http://arduino.cc and install latest Arduino IDE (1.8.x today)
 
+From Arduino IDE, add/install "CmdMessenger" library. 
+
+Then :
+
+    cd ~/Downloads/arduino-1.8.3/libraries
+    ln -s ~/Arduino/libraries/CmdMessenger .
+
 ### Software installation
 
 Connect to your Pi via SSH, using user `pi` :
