@@ -1,23 +1,26 @@
+ARDUINO_PORT=/dev/ttyUSB0
+ARDUINO_BAUD=57600
+
 default:
 	@echo "Nothing to do by default. Please read the manual."
 
 # -- Python Virtual Env machinery --------------------
-virtualenv.installed: _venv/bin/activate
+virtualenv.installed: _venv3/bin/activate
 
-_venv/bin/activate: requirements.txt
-	test -d _venv || virtualenv _venv
-	_venv/bin/pip install -Ur requirements.txt
-	touch _venv/bin/activate
+_venv3/bin/activate: requirements.txt
+	test -d _venv3 || virtualenv _venv3
+	_venv3/bin/pip install -Ur requirements.txt
+	touch _venv3/bin/activate
 
 virtualenv:
 	@if test "$(VIRTUAL_ENV)" = "" ; then \
-		echo "**** Please first start your virtualenv : source _venv/bin/activate ****"; \
+		echo "**** Please first start your virtualenv : source _venv3/bin/activate ****"; \
 		exit 1; \
 	fi
 
 # -- Install section --------------------
 
-install: install.pkg install.python
+install: install.pkg install.python install.arduino
 
 install.pkg:
 	sudo apt-get update
@@ -25,13 +28,22 @@ install.pkg:
 
 install.python: virtualenv.installed
 
+install.arduino: install.pkg
+	sudo apt-get install arduino-mk
+
+# -- Arduino section -------------------
+
+arduino.build:
+
+arduino.upload:
+
+
 # -- Update section --------------------
 
 update: virtualenv update.git
 
 update.git:
 	git pull
-
 
 # -- Dev section --------------------
 dev.test: virtualenv

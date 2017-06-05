@@ -4,10 +4,14 @@ Simple automated irrigating system for your Pi
 
 https://github.com/odeckmyn/pijardin
 
+This software needs some cheap hardware (Pi, Arduino, relay board, spkinklers), and is built on top of free software (mostly Python 3.x)
+
 ## Requirements
 
 - A Raspberry Pi (tested on a 2 B+)
 - Any micro SD card
+- An Arduino Nano board (ATmega328)
+- Relay board
 
 ## Installation
 
@@ -25,7 +29,7 @@ Boot
 Then :
 
     $ sudo apt-get update
-    $ sudo apt-get upgrade
+    $ sudo apt-get dist-upgrade
 
 ### Wifi Installation
 
@@ -42,6 +46,10 @@ Then :
 And then :
 
     $ sudo reboot
+
+### Dependencies installation
+
+Reach http://arduino.cc and install latest Arduino IDE (1.8.x today)
 
 ### Software installation
 
@@ -66,7 +74,7 @@ This will install all dependencies
 
 #### Finalize
 
-    $ source _venv/bin/activate
+    $ source _venv3/bin/activate
 
 ## Updating my Pi Jardin
 
