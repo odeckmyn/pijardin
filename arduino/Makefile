@@ -1,6 +1,6 @@
 BOARD_TAG   = nano
 BOARD_SUB   = atmega328
-ARDUINO_DIR   = ~/Downloads/arduino-1.8.3/
+ARDUINO_DIR   = ~/Downloads/arduino-1.8.3
 ARDUINO_LIBS = CmdMessenger
 
 include /usr/share/arduino/Arduino.mk

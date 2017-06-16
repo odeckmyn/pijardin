@@ -55,6 +55,8 @@ From Arduino IDE, add/install "CmdMessenger" library.
 
 Then :
 
+    PAS ENCORE AU POINT 
+    
     cd ~/Downloads/arduino-1.8.3/libraries
     ln -s ~/Arduino/libraries/CmdMessenger .
 

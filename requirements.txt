@@ -1,3 +1,4 @@
 ipython
 gpiozero
 PyCmdMessenger<0.3
+celery<5
