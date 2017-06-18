@@ -33,6 +33,7 @@ install: install.pkg install.python install.arduino
 install.pkg:
 	sudo apt-get update
 	sudo apt-get install ipython python-pip
+	sudo apt-get install rabbitmq-server
 
 install.python: virtualenv.installed
 

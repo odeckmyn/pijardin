@@ -1,5 +1,12 @@
-import PyCmdMessenger
+import PyCmdMessenger, os.path
 from celery import Celery
+from datetime import datetime
+from tinydb import TinyDB, Query
+
+HERE = os.path.dirname(__file__)
+
+# Log DB file
+db = TinyDB(os.path.join(HERE,'..','controller-db.json'))
 
 # Initialize an ArduinoBoard instance.  This is where you specify baud rate and
 # serial timeout.  If you are using a non ATmega328 board, you might also need
@@ -25,6 +32,8 @@ c = PyCmdMessenger.CmdMessenger(arduino,commands)
 # Initialize celery service
 app = Celery('controller', broker='pyamqp://guest@localhost//')
 
+RELAYS=(0,1,2,3,4,5,6,7,8)
+
 @app.task
 def open_relay(id):
     """Open Relay <id>"""
@@ -34,6 +43,12 @@ def open_relay(id):
 def close_relay(id):
     """Close Relay <id>"""
     c.send("close_relay",int(id))
+
+@app.task
+def close_relays():
+    """Close all relays"""
+    for id in RELAYS:
+        c.send("close_relay",int(id))
 
 @app.task
 def get_relay_state(id):
@@ -50,4 +65,9 @@ def is_alive():
     msg = c.receive()
     return msg[1][0]=='pong'
 
+@app.task
+def open_relay_for(id, duration):
+    """Open Relay <id> for <duration> seconds"""
+    open_relay(id)
+    return close_relay_for.apply_async((id,), countdown=duration)
 
