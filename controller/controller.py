@@ -8,11 +8,6 @@ HERE = os.path.dirname(__file__)
 # Log DB file
 db = TinyDB(os.path.join(HERE,'..','controller-db.json'))
 
-# Initialize an ArduinoBoard instance.  This is where you specify baud rate and
-# serial timeout.  If you are using a non ATmega328 board, you might also need
-# to set the data sizes (bytes for integers, longs, floats, and doubles).
-arduino = PyCmdMessenger.ArduinoBoard("/dev/ttyUSB0", baud_rate=9600)
-
 # List of command names (and formats for their associated arguments). These must
 # be in the same order as in the sketch.
 commands = [["open_relay","i"],
@@ -26,8 +21,15 @@ commands = [["open_relay","i"],
 
             ["error","s"]]
 
-# Initialize the messenger
-c = PyCmdMessenger.CmdMessenger(arduino,commands)
+
+if __name__=="__main__":
+    # Initialize an ArduinoBoard instance.  This is where you specify baud rate and
+    # serial timeout.  If you are using a non ATmega328 board, you might also need
+    # to set the data sizes (bytes for integers, longs, floats, and doubles).
+    arduino = PyCmdMessenger.ArduinoBoard("/dev/ttyUSB0", baud_rate=9600)
+
+    # Initialize the messenger
+    c = PyCmdMessenger.CmdMessenger(arduino,commands)
 
 # Initialize celery service
 app = Celery('controller', broker='pyamqp://guest@localhost//')
@@ -69,5 +71,5 @@ def is_alive():
 def open_relay_for(id, duration):
     """Open Relay <id> for <duration> seconds"""
     open_relay(id)
-    return close_relay_for.apply_async((id,), countdown=duration)
+    return close_relay.apply_async((id,), countdown=duration)
 
