@@ -22,14 +22,13 @@ commands = [["open_relay","i"],
             ["error","s"]]
 
 
-if __name__=="__main__":
-    # Initialize an ArduinoBoard instance.  This is where you specify baud rate and
-    # serial timeout.  If you are using a non ATmega328 board, you might also need
-    # to set the data sizes (bytes for integers, longs, floats, and doubles).
-    arduino = PyCmdMessenger.ArduinoBoard("/dev/ttyUSB0", baud_rate=9600)
+# Initialize an ArduinoBoard instance.  This is where you specify baud rate and
+# serial timeout.  If you are using a non ATmega328 board, you might also need
+# to set the data sizes (bytes for integers, longs, floats, and doubles).
+arduino = PyCmdMessenger.ArduinoBoard("/dev/ttyUSB0", baud_rate=9600)
 
-    # Initialize the messenger
-    c = PyCmdMessenger.CmdMessenger(arduino,commands)
+# Initialize the messenger
+c = PyCmdMessenger.CmdMessenger(arduino,commands)
 
 # Initialize celery service
 app = Celery('controller', broker='pyamqp://guest@localhost//')
