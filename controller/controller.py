@@ -1,9 +1,18 @@
-import PyCmdMessenger, os.path
+import PyCmdMessenger
+import os.path, logging
 from celery import Celery
 from datetime import datetime
 from tinydb import TinyDB, Query
 
 HERE = os.path.dirname(__file__)
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)-12s %(levelname)-8s %(message)s",
+  datefmt="%m-%d %H:%M", filename=os.path.join(HERE,'..', 'controller.log'), filemode="w")
+console=logging.StreamHandler()
+console.setLevel(logging.DEBUG)
+console.setFormatter(logging.Formatter('%(name)-12s: %(levelname)-8s %(message)s'))
+logging.getLogger('').addHandler(console)
+
 
 # Log DB file
 db = TinyDB(os.path.join(HERE,'..','controller-db.json'))
@@ -33,23 +42,26 @@ c = PyCmdMessenger.CmdMessenger(arduino,commands)
 # Initialize celery service
 app = Celery('controller', broker='pyamqp://guest@localhost//')
 
-RELAYS=(0,1,2,3,4,5,6,7,8)
+RELAYS=(0,1,2,3,4,5,6,7)
 
 @app.task
 def open_relay(id):
     """Open Relay <id>"""
+    logging.info("open relay %d"%id)
     c.send("open_relay",int(id))
 
 @app.task
 def close_relay(id):
     """Close Relay <id>"""
+    logging.info("close relay %d"%id)
     c.send("close_relay",int(id))
 
 @app.task
 def close_relays():
     """Close all relays"""
+    logging.info("close all relays")
     for id in RELAYS:
-        c.send("close_relay",int(id))
+        close_relay(id)
 
 @app.task
 def get_relay_state(id):
@@ -57,18 +69,33 @@ def get_relay_state(id):
     Returns True if opened, False if closed"""
     c.send("get_relay_state",int(id))
     msg = c.receive()
-    return msg[1][0]
+    result=msg[1][0]
+    logging.info("relay %d state : %s"%(id, result))
+    return result
+
+@app.task
+def get_relay_states():
+    """Return state of all relays.
+    Returns a list of [True if opened, False if closed]"""
+    result=[]
+    for id in RELAYS:
+        result.append( get_relay_state(id) )
+    logging.info("relays states : %s"%result)
+    return result
 
 @app.task
 def is_alive():
     """Returns True if arduino answers to ping"""
     c.send("ping")
     msg = c.receive()
-    return msg[1][0]=='pong'
+    result=msg[1][0]=='pong'
+    logging.info("ping : %s"%result)
+    return result
 
 @app.task
 def open_relay_for(id, duration):
     """Open Relay <id> for <duration> seconds"""
+    logging.info("open relay %d for %d s"%(id, duration))
     open_relay(id)
     return close_relay.apply_async((id,), countdown=duration)
 
